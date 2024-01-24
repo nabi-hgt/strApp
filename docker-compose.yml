@@ -1,0 +1,26 @@
+version: "2"
+
+services:
+  backend:
+    tty: true
+    # restart: unless-stopped
+    build:
+      context: .
+      dockerfile: ./docker/backend/Dockerfile   
+    # entrypoint: /app/docker/backend/run.sh 
+    volumes:
+      - .:/app
+    ports:
+      - "8080:8080"
+
+  db:
+    image: mongo:latest
+    hostname: mongodbserver
+    environment:
+      - HOME=/data/db
+    volumes:
+      - D:\docker_volumes\mongodb:/data/db
+    ports:
+      - "27017:27017"
+volumes:
+  static_volume: {}
